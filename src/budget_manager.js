@@ -6,13 +6,16 @@ export class BudgetManager {
         if (budgets.length > 0) {
             const endDate = dayjs(end);
             const startDate = dayjs(start);
-            if (startDate.isAfter(budgets[0].lastDay())) {
+            let lastDay = budgets[0].lastDay();
+            let firstDay = budgets[0].firstDay();
+            if (startDate.isAfter(lastDay)) {
                 return 0;
             }
-            if (endDate.isBefore(budgets[0].firstDay())) {
+            if (endDate.isBefore(firstDay)) {
                 return 0;
             }
-            return endDate.diff(startDate, 'day') + 1;
+            let overlappingStart = startDate.isAfter(firstDay) ? startDate : firstDay;
+            return endDate.diff(overlappingStart, 'day') + 1;
         }
         return 0;
     }
