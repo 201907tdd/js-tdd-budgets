@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import {Period} from "./period";
 
 export class Budget {
     yearMonth;
@@ -15,5 +16,9 @@ export class Budget {
 
     lastDay() {
         return this.firstDay().endOf('month');
+    }
+
+    createPeriod() {
+        return new Period(this.firstDay(), this.lastDay());
     }
 }
