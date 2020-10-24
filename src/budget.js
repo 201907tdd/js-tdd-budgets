@@ -29,4 +29,8 @@ export class Budget {
     dailyAmount() {
         return this.amount / this.days();
     }
+
+    overlappingAmount(period) {
+        return period.overlappingDays(this.createPeriod()) * this.dailyAmount();
+    }
 }
