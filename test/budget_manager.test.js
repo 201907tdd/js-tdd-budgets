@@ -79,6 +79,16 @@ describe('total amount between period', function () {
             0);
     });
 
+    it('daily amount is 10', () => {
+        givenBudgets([
+            new Budget('200004', 300),
+        ]);
+        totalAmountShouldBe(
+            new Date(2000, 3, 1),
+            new Date(2000, 3, 10),
+            100);
+    });
+
     function givenBudgets(budgets) {
         fake_get_budgets.mockReturnValueOnce(budgets);
     }
