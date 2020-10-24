@@ -11,7 +11,7 @@ export class BudgetManager {
         if (budgets.length > 0) {
             let budget = budgets[0];
             let another = new Period(budget.firstDay(), budget.lastDay());
-            return period.overlappingDays(budget, another);
+            return period.overlappingDays(another);
         }
         return 0;
     }
