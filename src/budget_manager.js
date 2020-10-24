@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import {Period} from "./period";
 
 export class BudgetManager {
     totalAmount(start, end) {
@@ -7,22 +8,23 @@ export class BudgetManager {
             const endDate = dayjs(end);
             const startDate = dayjs(start);
             let budget = budgets[0];
-            return this.overlappingDays(budget, startDate, endDate);
+            let period = new Period(startDate, endDate);
+            return this.overlappingDays(budget, period);
         }
         return 0;
     }
 
-    overlappingDays(budget, startDate, endDate) {
+    overlappingDays(budget, period) {
         let lastDay = budget.lastDay();
         let firstDay = budget.firstDay();
-        if (startDate.isAfter(lastDay)) {
+        if (period.startDate.isAfter(lastDay)) {
             return 0;
         }
-        if (endDate.isBefore(firstDay)) {
+        if (period.endDate.isBefore(firstDay)) {
             return 0;
         }
-        let overlappingStart = startDate.isAfter(firstDay) ? startDate : firstDay;
-        let overlappingEnd = endDate.isBefore(lastDay) ? endDate : lastDay;
+        let overlappingStart = period.startDate.isAfter(firstDay) ? period.startDate : firstDay;
+        let overlappingEnd = period.endDate.isBefore(lastDay) ? period.endDate : lastDay;
         return overlappingEnd.diff(overlappingStart, 'day') + 1;
     }
 
