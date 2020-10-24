@@ -21,4 +21,8 @@ export class Budget {
     createPeriod() {
         return new Period(this.firstDay(), this.lastDay());
     }
+
+    days() {
+        return this.firstDay().daysInMonth();
+    }
 }

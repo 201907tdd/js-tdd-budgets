@@ -10,7 +10,9 @@ export class BudgetManager {
         let budgets = this.getBudgets();
         if (budgets.length > 0) {
             let budget = budgets[0];
-            return period.overlappingDays(budget.createPeriod());
+            let dailyAmount = budget.amount / budget.days();
+            let overlappingDays = period.overlappingDays(budget.createPeriod());
+            return overlappingDays * dailyAmount;
         }
         return 0;
     }
@@ -18,4 +20,5 @@ export class BudgetManager {
     getBudgets() {
         return undefined;
     }
+
 }
