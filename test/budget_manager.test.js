@@ -4,14 +4,15 @@ import {Budget} from "../src/budget";
 
 describe('total amount between period', function () {
     let budgetManager;
+    let fake_get_budgets;
     beforeEach(() => {
         budgetManager = new BudgetManager();
+        fake_get_budgets = jest.fn();
+        budgetManager.getBudgets = fake_get_budgets;
     });
 
     it('no budgets', () => {
-        const fake_get_budgets = jest.fn();
         fake_get_budgets.mockReturnValueOnce([]);
-        budgetManager.getBudgets = fake_get_budgets;
         totalAmountShouldBe(
             new Date(2000, 3, 1),
             new Date(2000, 3, 1),
@@ -19,11 +20,9 @@ describe('total amount between period', function () {
     });
 
     it('period inside budget month', () => {
-        const fake_get_budgets = jest.fn();
         fake_get_budgets.mockReturnValueOnce([
             new Budget('200004', 30),
         ]);
-        budgetManager.getBudgets = fake_get_budgets;
         totalAmountShouldBe(
             new Date(2000, 3, 1),
             new Date(2000, 3, 1),
