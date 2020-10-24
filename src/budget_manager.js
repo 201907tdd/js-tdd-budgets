@@ -6,6 +6,9 @@ export class BudgetManager {
         if (budgets.length > 0) {
             const endDate = dayjs(end);
             const startDate = dayjs(start);
+            if (startDate.isAfter(budgets[0].lastDay())) {
+                return 0;
+            }
             if (endDate.isBefore(budgets[0].firstDay())) {
                 return 0;
             }

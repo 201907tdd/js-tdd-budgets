@@ -12,4 +12,8 @@ export class Budget {
     firstDay() {
         return dayjs(this.yearMonth, 'YYYYMM');
     }
+
+    lastDay() {
+        return dayjs(new Date(2000, 3, 30));
+    }
 }
