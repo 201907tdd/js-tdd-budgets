@@ -8,13 +8,11 @@ export class Period {
     }
 
     overlappingDays(budget, another) {
-        let lastDay = another.endDate;
-        let firstDay = another.startDate;
-        if (this.startDate.isAfter(lastDay) || this.endDate.isBefore(firstDay)) {
+        if (this.startDate.isAfter(another.endDate) || this.endDate.isBefore(another.startDate)) {
             return 0;
         }
-        let overlappingStart = this.startDate.isAfter(firstDay) ? this.startDate : firstDay;
-        let overlappingEnd = this.endDate.isBefore(lastDay) ? this.endDate : lastDay;
+        let overlappingStart = this.startDate.isAfter(another.startDate) ? this.startDate : another.startDate;
+        let overlappingEnd = this.endDate.isBefore(another.endDate) ? this.endDate : another.endDate;
         return overlappingEnd.diff(overlappingStart, 'day') + 1;
     }
 }
