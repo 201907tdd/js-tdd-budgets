@@ -59,6 +59,16 @@ describe('total amount between period', function () {
             2);
     });
 
+    it('period overlapping with budget last day', () => {
+        givenBudgets([
+            new Budget('200004', 30),
+        ]);
+        totalAmountShouldBe(
+            new Date(2000, 3, 30),
+            new Date(2000, 4, 2),
+            1);
+    });
+
     function givenBudgets(budgets) {
         fake_get_budgets.mockReturnValueOnce(budgets);
     }
