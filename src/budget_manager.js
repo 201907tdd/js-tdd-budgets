@@ -8,11 +8,14 @@ export class BudgetManager {
         let period = new Period(startDate, endDate);
 
         let budgets = this.getBudgets();
-        if (budgets.length > 0) {
-            let budget = budgets[0];
-            return budget.overlappingAmount(period);
-        }
-        return 0;
+        let totalAmount = 0;
+        budgets.forEach((budget) => totalAmount += budget.overlappingAmount(period));
+        return totalAmount;
+        // if (budgets.length > 0) {
+        //     let budget = budgets[0];
+        //     return budget.overlappingAmount(period);
+        // }
+        // return 0;
     }
 
     getBudgets() {
