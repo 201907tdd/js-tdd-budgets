@@ -12,7 +12,7 @@ describe('total amount between period', function () {
     });
 
     it('no budgets', () => {
-        fake_get_budgets.mockReturnValueOnce([]);
+        givenBudgets([]);
         totalAmountShouldBe(
             new Date(2000, 3, 1),
             new Date(2000, 3, 1),
@@ -20,7 +20,7 @@ describe('total amount between period', function () {
     });
 
     it('period inside budget month', () => {
-        fake_get_budgets.mockReturnValueOnce([
+        givenBudgets([
             new Budget('200004', 30),
         ]);
         totalAmountShouldBe(
@@ -28,6 +28,10 @@ describe('total amount between period', function () {
             new Date(2000, 3, 1),
             1);
     });
+
+    function givenBudgets(budgets) {
+        fake_get_budgets.mockReturnValueOnce(budgets);
+    }
 
     function totalAmountShouldBe(start, end, expected) {
         const totalAmount = budgetManager.totalAmount(start, end);
