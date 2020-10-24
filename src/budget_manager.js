@@ -15,7 +15,8 @@ export class BudgetManager {
                 return 0;
             }
             let overlappingStart = startDate.isAfter(firstDay) ? startDate : firstDay;
-            return endDate.diff(overlappingStart, 'day') + 1;
+            let overlappingEnd = endDate.isBefore(lastDay) ? endDate : lastDay;
+            return overlappingEnd.diff(overlappingStart, 'day') + 1;
         }
         return 0;
     }
