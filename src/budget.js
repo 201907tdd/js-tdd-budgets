@@ -14,6 +14,6 @@ export class Budget {
     }
 
     lastDay() {
-        return dayjs(new Date(2000, 3, 30));
+        return this.firstDay().endOf('month');
     }
 }
