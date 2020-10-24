@@ -25,4 +25,8 @@ export class Budget {
     days() {
         return this.firstDay().daysInMonth();
     }
+
+    dailyAmount() {
+        return this.amount / this.days();
+    }
 }
