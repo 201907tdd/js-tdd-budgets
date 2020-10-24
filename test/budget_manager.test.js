@@ -89,6 +89,18 @@ describe('total amount between period', function () {
             100);
     });
 
+    it('multiple budgets', () => {
+        givenBudgets([
+            new Budget('200003', 31),
+            new Budget('200004', 300),
+            new Budget('200005', 3100),
+        ]);
+        totalAmountShouldBe(
+            new Date(2000, 2, 31),
+            new Date(2000, 4, 10),
+            1 + 300 + 1000);
+    });
+
     function givenBudgets(budgets) {
         fake_get_budgets.mockReturnValueOnce(budgets);
     }
